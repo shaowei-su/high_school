@@ -11,13 +11,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140613121554) do
+ActiveRecord::Schema.define(version: 20140623090139) do
+
+  create_table "admins", force: true do |t|
+    t.string   "name"
+    t.string   "password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "clas", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "grade"
+  end
+
+  create_table "courses", force: true do |t|
+    t.string   "name"
+    t.text     "program"
+    t.integer  "teacher_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "department"
+    t.integer  "grade"
+  end
+
+  add_index "courses", ["teacher_id"], name: "index_courses_on_teacher_id"
+
+  create_table "lessons", force: true do |t|
+    t.string   "weekday"
+    t.integer  "course_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "cla_id"
+    t.string   "time_slot"
+  end
+
+  add_index "lessons", ["course_id"], name: "index_lessons_on_course_id"
 
   create_table "teachers", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "department"
+    t.string   "email"
+    t.string   "office"
+    t.string   "telephone"
   end
 
 end

@@ -1,0 +1,15 @@
+<div class="content">
+	<ol class="breadcrumb">
+		<li><%= link_to "<< Back to #{@teacher.name}", :back%></li>
+	</ol>
+
+	<h1>Courses Related</h1>
+		<% @teacher.courses.each do |course|%>
+			<ul>
+				<li><%= link_to course.name, course_path(course)%></li>
+			</ul>
+		<% end %>
+
+
+
+</div>

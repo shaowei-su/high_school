@@ -1,0 +1,18 @@
+<div>
+	<%= f.label :grade%>
+	<%= f.select :grade, Cla::GRADES, prompt: true%>
+
+	<%= f.label "Class"%>
+	<%= f.collection_select :cla_id, Cla.all, :id, :full_name, prompt: true%>
+
+</div>
+
+
+<%= f.label :weekday%>
+<%= f.select :weekday, Lesson::WEEKDAYS, prompt: true%>
+
+<%= f.label "Schedule" %>
+<%= f.select :time_slot, Lesson::TIME_SLOTS, prompt: true%>
+
+<%= f.label "Course"%>
+<%= f.collection_select :course_id, Course.all, :id, :name, prompt: true%>

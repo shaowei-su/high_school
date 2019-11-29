@@ -1,22 +1,34 @@
-<!-- if the page is refreshed...oops-->
-<% unless request.referrer.nil? %>
-	<% provide( :prev_page, get_path(request.referrer) )%>
+<% set_prev_page(request.referrer) %>
 
-	<ol class="breadcrumb">
-	  <li><%= link_to "Home", root_path%></li>
+<%= render "structural_links", teacher: @teacher%>
 
-	  <% if yield(:prev_page) == 'teachers'%>
-	  	<li><%= link_to "All Teachers", teachers_path %></li>
-	  <% else %>
-	  	<li><%= link_to "Departments", departments_path %></li>
-	  	<li><%= link_to format4display(@teacher.department), "/departments/#{@teacher.department}" %></li>
-	  <% end %>
+<div class="span9 content">
 
-	  <li class="active"><%= @teacher.name%></li>
-	</ol>
-<% end %>
+	<%= render 'layouts/breadcrumb'%>
 
+	<h1><%= @teacher.name%></h1>
 
-<h1><%= @teacher.name%></h1>
-<h2><%= @teacher.department%></h2>
+	<p>Department: <%= @teacher.department%></p>
+	<p>Office: <%= @teacher.office%></p>
+	<p>Telephone: <%= @teacher.telephone%></p>
+	<p>Email: <%= @teacher.email%></p>
 
+	<%= button_to('Courses related', courses_related_path(@teacher), :class => 'btn btn-large btn-primary' ,:method => :get )%>
+
+	<% if signed_in? %>
+		<%= button_to('Edit', edit_teacher_path(@teacher), :class => 'btn btn-large btn-primary' ,:method => :get )%>
+	<% end %>
+
+	<br>
+	<% if get_prev_path(2) == 'courses' %>
+		<% course = Course.find( get_prev_path(1) ) %>
+		<%= link_to "<< Back to #{course.name}", :back%>
+	<% elsif get_prev_path(2) == 'clas' %>
+		<% cla = Cla.find( get_prev_path(1) ) %>
+		<% cla_name = full_class_name(cla.id)%>
+		<%= link_to "<< Back to #{cla_name}", :back%>
+	<% end %>
+
+	
+	  
+</div>

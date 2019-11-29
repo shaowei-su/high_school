@@ -1,10 +1,31 @@
 Rails.application.routes.draw do
+
   resources :teachers
+  resources :courses
+  resources :clas
+  resources :lessons
+  resources :sessions, only: [:new, :create, :destroy]
+
+
   root 'pages#home'
 
-  get '/departments', to: 'teachers#departments', via: 'get'
-  get '/departments/:department', to: 'teachers#department', via: 'get'
+  get '/teachers_depts', to: 'teachers#departments', as: :departments
+  get '/teachers_depts/:department', to: 'teachers#department', as: :department
+  get '/teachers/:id/timetable' => 'teachers#timetable', as: :timetable
+  get '/teachers/:id/courses_related' => 'teachers#courses_related', as: :courses_related
 
+  
+  get 'pages/application', to: 'pages#application', via: 'get'
+  get 'pages/faq', to: 'pages#faq', via: 'get'
+  get 'pages/checklist', to: 'pages#checklist', via: 'get'
+
+  get '/clas/:id/photos', to:'clas#photos', as: :photos
+
+  get '/courses_by_grade', to: 'courses#by_grade', via: 'get'
+  get '/courses/:id/timetable' => 'courses#timetable', as: :course_timetable
+
+  get '/signin' => 'sessions#new', via: 'get'
+  get '/signout' => 'sessions#destroy', via: 'delete'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

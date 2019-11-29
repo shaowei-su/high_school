@@ -1,4 +1,5 @@
 module TeachersHelper
+
 	def format4url(dept_name)
 		dept_name.downcase.gsub(/\s+/, '-')
 	end
@@ -7,5 +8,6 @@ module TeachersHelper
 		temp = dept_name.gsub(/[-]/, ' ')
 		temp.titleize
 	end
+
 
 end

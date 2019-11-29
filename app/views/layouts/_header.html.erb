@@ -1,10 +1,21 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-	<div class="navbar-inner">
-		<%= link_to "REGIS HIGH SCHOOL", root_path, id: "logo" %>
-		<ul class="nav pull-right">
-			<li><%= link_to "Admission", '#'%></li>
-			<li><%= link_to "Teachers", teachers_path%></li>
-		</ul>
+<header id="nav" class="navbar-fixed-top">
+	<div class="navbar-header">
+		
+		<a id="logo" href=<%= root_url%>>REGIS</a>
+		
 	</div>
+	<ul class="nav navbar-nav pull-right">
+		
+		<li><%= link_to "Admission", pages_application_path%></li>
+		<li><%= link_to "Teachers", teachers_path%></li>
+		<li><%= link_to "Courses", courses_path%></li>
+		<li><%= link_to "Classes", clas_path%></li>
+		<% if signed_in? %>
+			<li><%= link_to "Signout", signout_path%></li>
+		<% else %>
+			<li><%= link_to "Signin", signin_path%></li>
+		<% end %>
+
+	</ul>
 
 </header>

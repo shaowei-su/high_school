@@ -1,8 +1,9 @@
-<%= render 'teachers/group_links'%>
+<%= render 'group_links'%>
 
-<div class="span9">
+<div class="span9 content">
+	<%= render 'layouts/breadcrumb'%>
 	<h1>All Teachers</h1>
-	<table>
+	<table class="table">
 	  <tr>
 	    <th>Name</th>
 	    <th>Department</th>
@@ -10,9 +11,14 @@
 	 
 	  <% @teachers.each do |teacher| %>
 		  <tr>
-		    <td><%= link_to teacher.name, teacher_path(teacher.id) %></td>
+		    <td><%= link_to teacher.name, teacher_path(teacher) %></td>
 		    <td><%= teacher.department %></td>
 		  </tr>
 	  <% end %>
 	</table>
+
+	<br>
+	<% if signed_in? %>
+		<%= button_to('New Teacher', new_teacher_path, :class => 'btn btn-large btn-primary' ,:method => :get )%>
+	<% end %>
 </div>
